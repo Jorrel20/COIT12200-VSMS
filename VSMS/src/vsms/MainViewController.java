@@ -41,6 +41,7 @@ public class MainViewController implements Initializable {
     //creates new patient entry
     public void goToCustomers (ActionEvent event) {
         System.out.println("Going to customer view");
+        //VSMS.loadScene("CustomerView");
     }
     
     //updates patient from current input feild values
