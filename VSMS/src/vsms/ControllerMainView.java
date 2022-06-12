@@ -18,7 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 //main view controller class - just like it says on the box
-public class MainViewController implements Initializable {
+public class ControllerMainView implements Initializable {
     
     //input lists
     
@@ -40,23 +40,22 @@ public class MainViewController implements Initializable {
 
     //creates new patient entry
     public void goToCustomers (ActionEvent event) {
-        System.out.println("Going to customer view");
-        //VSMS.loadScene("CustomerView");
+        VSMS.loadScene("Customer");
     }
     
     //updates patient from current input feild values
     public void goToVehicles (ActionEvent event) {
-        System.out.println("Going to vehicle view");
+        VSMS.loadScene("Vehicle");
     }
     
     //loads next patient data into input feilds 
     public void goToServices (ActionEvent event) {
-        System.out.println("Going to service view");
+        VSMS.loadScene("Service");
     }
     
     //loads previous patient data into input feilds 
     public void goToStats (ActionEvent event) {
-        System.out.println("Going to stats view");
+        VSMS.loadScene("Statistic");
     }
     
     //closes connection and exits application
@@ -90,7 +89,7 @@ public class MainViewController implements Initializable {
 //            java.util.Date utilDate = new SimpleDateFormat("yyyy-mm-dd").parse(date);
 //            sqlDate = new java.sql.Date(utilDate.getTime());
 //        } catch (ParseException ex) {
-//            Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(ControllerMainView.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //        return sqlDate;
 //    }

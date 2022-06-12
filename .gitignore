@@ -1,3 +1,8 @@
 /VSMS/nbproject/private/
 /VSMS/build/
 /VSMS/dist/
+/VSMS2/nbproject/private/
+/VSMS2/build/
+/VSMS2/dist/
+*.properties
+VSMS/nbproject/project.properties

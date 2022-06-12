@@ -1,7 +1,7 @@
 /*
  * Rory Allen - s#12149026
  */
-package vsms;
+package domain;
 
 public class Vehicle {
     
