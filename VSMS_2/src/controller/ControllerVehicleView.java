@@ -6,6 +6,7 @@
 package controller;
 
 import domain.Customer;
+import domain.Vehicle;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
@@ -15,6 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import vsms.VSMS;
@@ -59,9 +61,40 @@ public class ControllerVehicleView implements Initializable {
                 selectedCustomer = (Customer) cmbCustomer.getSelectionModel().getSelectedItem();
             }
         });
+    }
+    
+    public void addVehicle (ActionEvent event) {
+        if (validateVehicle()){//todo
+            Vehicle v = new Vehicle(
+                txtRego.getText(),
+                txtBrand.getText(),
+                txtModel.getText(),
+                Integer.parseInt(txtYear.getText()),
+                Integer.parseInt(txtKilometres.getText()),
+                selectedCustomer.getCustomerID()
+        );
+        VSMS.getModel().insertVehicle(v);
+        Alert success = new Alert(Alert.AlertType.INFORMATION);
+        success.setHeaderText("Success!");
+        success.setContentText(v.getBrand() + " " + v.getModel() + " has been added to customer (id: " + v.getCustomerID() + ")");
+        success.showAndWait();
+        clearAll();
+        }
     }    
     
     public void backToMain (ActionEvent event) {
         VSMS.loadScene("Main");
+    }
+    
+    private boolean validateVehicle(){//todo
+        return true;
+    }
+    
+    private void clearAll() {
+        txtRego.setText("");
+        txtBrand.setText("");
+        txtModel.setText("");
+        txtYear.setText("");
+        txtKilometres.setText("");
     }
 }

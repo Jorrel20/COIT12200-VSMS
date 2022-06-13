@@ -17,12 +17,7 @@
     -fx-text-fill: #535c68;
 }
 
-.combo-action {
-    -fx-background-color: #30336b;
-    -fx-text-fill: #dff9fb;
-    -jfx-focus-color: white;
-    -jfx-unfocus-color: white;
-}
+
 
 .combo-box > .list-cell {
 -fx-background: #badc58;

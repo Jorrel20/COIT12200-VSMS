@@ -12,11 +12,11 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="275.0" layoutX="15.0" layoutY="103.0" stroke="BLACK" strokeType="INSIDE" styleClass="box" width="571.0" />
       <Button layoutX="444.0" layoutY="413.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="25.0" prefWidth="120.0" styleClass="button-back" text="Back" />
       <Label layoutX="32.0" layoutY="32.0" styleClass="page-heading" text="Vehicles" />
-      <TextField layoutX="25.0" layoutY="144.0" prefHeight="25.0" prefWidth="261.0" />
-      <TextField layoutX="25.0" layoutY="229.0" prefHeight="25.0" prefWidth="261.0" />
-      <TextField layoutX="25.0" layoutY="325.0" prefHeight="25.0" prefWidth="261.0" />
-      <TextField layoutX="305.0" layoutY="144.0" prefHeight="25.0" prefWidth="261.0" />
-      <TextField layoutX="305.0" layoutY="229.0" prefHeight="25.0" prefWidth="261.0" />
+      <TextField fx:id="txtRego" layoutX="25.0" layoutY="144.0" prefHeight="25.0" prefWidth="261.0" />
+      <TextField fx:id="txtBrand" layoutX="25.0" layoutY="229.0" prefHeight="25.0" prefWidth="261.0" />
+      <TextField fx:id="txtModel" layoutX="25.0" layoutY="325.0" prefHeight="25.0" prefWidth="261.0" />
+      <TextField fx:id="txtYear" layoutX="305.0" layoutY="144.0" prefHeight="25.0" prefWidth="261.0" />
+      <TextField fx:id="txtKilometres" layoutX="305.0" layoutY="229.0" prefHeight="25.0" prefWidth="261.0" />
       <ComboBox fx:id="cmbCustomer" layoutX="305.0" layoutY="325.0" prefHeight="25.0" prefWidth="261.0" styleClass="combo-box" />
       <Label layoutX="25.0" layoutY="120.0" styleClass="form-label" text="Registration Number" />
       <Label layoutX="25.0" layoutY="203.0" styleClass="form-label" text="Brand" />
@@ -24,6 +24,6 @@
       <Label layoutX="305.0" layoutY="120.0" styleClass="form-label" text="Year" />
       <Label layoutX="305.0" layoutY="203.0" styleClass="form-label" text="Kilometres" />
       <Label layoutX="305.0" layoutY="300.0" styleClass="form-label" text="Customer" />
-      <Button layoutX="32.0" layoutY="413.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" styleClass="button-action" text="Add Vehicle" />
+      <Button layoutX="32.0" layoutY="413.0" mnemonicParsing="false" onAction="#addVehicle" prefHeight="25.0" prefWidth="120.0" styleClass="button-action" text="Add Vehicle" />
    </children>
 </AnchorPane>
