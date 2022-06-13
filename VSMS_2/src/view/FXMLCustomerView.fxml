@@ -21,16 +21,17 @@
       <Label layoutX="305.0" layoutY="123.0" styleClass="form-label" text="Phone Number" />
       <Label layoutX="30.0" layoutY="177.0" styleClass="form-label" text="Address" />
       <Button layoutX="30.0" layoutY="262.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="25.0" prefWidth="110.0" styleClass="button-action" text="Add Customer" />
-      <Button layoutX="451.0" layoutY="262.0" mnemonicParsing="false" styleClass="button-action" text="Update Customer" />
+      <Button layoutX="242.0" layoutY="262.0" mnemonicParsing="false" onAction="#updateCustomer" prefHeight="25.0" prefWidth="110.0" styleClass="button-action" text="Update Customer" />
       <TextField fx:id="txtSearch" layoutX="33.0" layoutY="314.0" prefHeight="25.0" prefWidth="256.0" />
       <Button layoutX="308.0" layoutY="314.0" mnemonicParsing="false" onAction="#searchCustomerByName" prefHeight="25.0" prefWidth="107.0" styleClass="button-action" text="Search Name" />
       <Button layoutX="451.0" layoutY="314.0" mnemonicParsing="false" onAction="#searchCustomerByPhone" prefHeight="25.0" prefWidth="110.0" styleClass="button-action" text="Search Phone" />
-      <Button disable="true" layoutX="308.0" layoutY="357.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" styleClass="button-action" text="&lt;- Previous" />
-      <Button disable="true" layoutX="453.0" layoutY="357.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" styleClass="button-action" text="Next -&gt;" />
-      <Label layoutX="33.0" layoutY="361.0" styleClass="form-label" text="0 of 0" />
+      <Button fx:id="btnPrevious" disable="true" layoutX="308.0" layoutY="357.0" mnemonicParsing="false" onAction="#previousResult" prefHeight="25.0" prefWidth="107.0" styleClass="button-action" text="&lt;- Previous" />
+      <Button fx:id="btnNext" disable="true" layoutX="450.0" layoutY="357.0" mnemonicParsing="false" onAction="#nextResult" prefHeight="25.0" prefWidth="110.0" styleClass="button-action" text="Next -&gt;" />
+      <Label fx:id="lblResults" layoutX="33.0" layoutY="361.0" styleClass="form-label" />
       <TextField fx:id="txtCustomerID" editable="false" layoutX="305.0" layoutY="88.0" prefHeight="25.0" prefWidth="256.0" />
       <Label layoutX="306.0" layoutY="62.0" styleClass="form-label" text="Customer ID" />
-      <Button layoutX="231.0" layoutY="419.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="131.0" styleClass="button-action" text="Add Service" />
-      <Button layoutX="33.0" layoutY="419.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="131.0" styleClass="button-action" text="Add Vehicle" />
+      <Button layoutX="231.0" layoutY="419.0" mnemonicParsing="false" onAction="#goToServices" prefHeight="25.0" prefWidth="131.0" styleClass="button-action" text="Add Service" />
+      <Button layoutX="33.0" layoutY="419.0" mnemonicParsing="false" onAction="#goToVehicles" prefHeight="25.0" prefWidth="131.0" styleClass="button-action" text="Add Vehicle" />
+      <Button layoutX="451.0" layoutY="262.0" mnemonicParsing="false" onAction="#clearAll" prefHeight="25.0" prefWidth="110.0" styleClass="button-action" text="Clear All" />
    </children>
 </AnchorPane>
