@@ -5,6 +5,7 @@
 package vsms;
 
 import domain.Customer;
+import domain.Vehicle;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -27,7 +28,10 @@ public class ServiceModel {
                                 SQL_GET_CUSTOMER_BY_NAME = null,
                                 SQL_GET_CUSTOMER_BY_PHONE = null,
                                 SQL_INSERT_CUSTOMER = null,
-                                SQL_UPDATE_CUSTOMER = null;
+                                SQL_UPDATE_CUSTOMER = null,
+            
+                                SQL_INSERT_VEHICLE;
+    
     
     //constructor establishes connection to db and defines sql queries
     public ServiceModel (){
@@ -43,6 +47,9 @@ public class ServiceModel {
             SQL_UPDATE_CUSTOMER = connection.prepareStatement("UPDATE Customer "
                                                         + "SET FirstName = ?, LastName = ?, Phone = ?, Address = ? "
                                                         + "WHERE CustomerID = ?");
+            SQL_INSERT_VEHICLE = connection.prepareStatement("INSERT INTO Vehicle "
+                                                        + "(RegoNumber, Brand, Model, Year, Kilometres, CustomerID) "
+                                                        + "VALUES (?, ?, ?, ?, ?, ?)");
             
         } catch (SQLException e) {
             System.out.println("ServiceModel.init: cannot create connection to db - " + e.getLocalizedMessage());
@@ -146,6 +153,24 @@ public class ServiceModel {
             System.out.println("customer updated: " + customer.toString());
         } catch (SQLException e) {
             System.out.println("ServiceModel.updateCustomer: problem executing query - " + e.getLocalizedMessage());
+            close();
+        }
+    }
+    
+    //adds a new customer entry to the db
+    public void insertVehicle(Vehicle vehicle) {
+        try {
+            SQL_INSERT_VEHICLE.setString(1, vehicle.getRegoNumber());
+            SQL_INSERT_VEHICLE.setString(2, vehicle.getBrand());
+            SQL_INSERT_VEHICLE.setString(3, vehicle.getModel());
+            SQL_INSERT_VEHICLE.setInt(4, vehicle.getYear());
+            SQL_INSERT_VEHICLE.setInt(5, vehicle.getKilometres());
+            SQL_INSERT_VEHICLE.setInt(6, vehicle.getCustomerID());
+            
+            SQL_INSERT_VEHICLE.executeUpdate();
+            System.out.println("vehicle added: " + vehicle.toString());
+        } catch (SQLException e) {
+            System.out.println("ServiceModel.insertVehicle: problem executing query - " + e.getLocalizedMessage());
             close();
         }
     }
