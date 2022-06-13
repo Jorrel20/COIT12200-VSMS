@@ -86,15 +86,52 @@ public class ControllerVehicleView implements Initializable {
         VSMS.loadScene("Main");
     }
     
-    private boolean validateVehicle(){//todo
-        return true;
-    }
-    
     private void clearAll() {
         txtRego.setText("");
         txtBrand.setText("");
         txtModel.setText("");
         txtYear.setText("");
         txtKilometres.setText("");
+    }
+    
+    //returns true if fields contain valid vehicle data
+    private boolean validateVehicle () {
+        final int YEAR_LENGTH = 4;
+        boolean valid = true;
+        String errorMessage = "";
+        if (txtRego.getText().length() == 0){
+            valid = false;
+            errorMessage += "Rego cannot be blank!\n";       
+        }
+        if (txtBrand.getText().length() == 0){
+            valid = false;
+            errorMessage += "Brand cannot be blank!\n";       
+        }
+        if (txtModel.getText().length() == 0){
+            valid = false;
+            errorMessage += "Model cannot be blank!\n";       
+        }
+        if (!txtYear.getText().matches("^(?:\\d*\\.)?\\d+$") || txtYear.getText().length() != YEAR_LENGTH) {            
+            valid = false;                                                          
+            errorMessage += "Year must be 4 numerical digits!\n";       
+        }
+        if ((txtKilometres.getText().length() == 0)){
+            valid = false;
+            errorMessage += "Kilometres cannot be blank!\n";
+        }
+        if (!txtKilometres.getText().matches("^(?:\\d*\\.)?\\d+$")) {            
+            valid = false;                                                          
+            errorMessage += "Kilometres field must only contain numbers!\n";       
+        }
+        if (selectedCustomer == null){
+            valid = false;
+            errorMessage += "Please select a customer!\n";       
+        }
+        if (!valid){
+            Alert invalid = new Alert(Alert.AlertType.ERROR);
+            invalid.setContentText(errorMessage);
+            invalid.showAndWait();    
+        }
+        return valid;
     }
 }
