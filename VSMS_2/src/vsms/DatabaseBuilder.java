@@ -16,7 +16,7 @@ import java.sql.Statement;
  * @author allen
  */
 public class DatabaseBuilder {
-    private static final boolean ADD_TEST_DATA = false;//if true, loads db with test data
+    private static final boolean ADD_TEST_DATA = true;//if true, loads db with test data
     private static final String DB_NAME = "VSMS",
                                 MYSQL_URL = "jdbc:mysql://localhost:3306",
                                 USERNAME = "root",
@@ -68,7 +68,8 @@ public class DatabaseBuilder {
         //create customer table if it does not exist
         SQL_CREATE_CUSTOMER_TABLE = "CREATE TABLE IF NOT EXISTS " + TBL_CUSTOMER +
                                     "(CustomerID INT not NULL AUTO_INCREMENT," +
-                                    "Name VARCHAR(30)," +
+                                    "FirstName VARCHAR(20)," +
+                                    "LastName VARCHAR(20)," +
                                     "Phone VARCHAR(20)," +
                                     "Address VARCHAR(100)," +
                                     "PRIMARY KEY (CustomerID))";
@@ -96,12 +97,12 @@ public class DatabaseBuilder {
         
         //insert statement for test data
         SQL_CUSTOMER_TEST_DATA =    "INSERT INTO " + TBL_CUSTOMER 
-                                    + "(Name, Phone, Address)"
-                                    + " VALUES ('Rory Allen', '0404040404', '7 Newhave Street, Mount Tarcoola, WA 6530')"
-                                    + ", ('Caitlyn Allen', '0404040405', '7 Newhave Street, Mount Tarcoola, WA 6530')"
-                                    + ", ('Daffodil Allen', '0404040406', '7 Newhave Street, Mount Tarcoola, WA 6530')"
-                                    + ", ('Lily Allen', '0404040407', '7 Newhave Street, Mount Tarcoola, WA 6530')"
-                                    + ", ('Moss Allen', '0404040408', '7 Newhave Street, Mount Tarcoola, WA 6530')";
+                                    + "(FirstName, LastName, Phone, Address)"
+                                    + " VALUES ('Rory', 'Allen', '0404040404', '7 Newhave Street, Mount Tarcoola, WA 6530')"
+                                    + ", ('Caitlyn', 'Allen', '0404040405', '7 Newhave Street, Mount Tarcoola, WA 6530')"
+                                    + ", ('Daffodil', 'Allen', '0404040406', '7 Newhave Street, Mount Tarcoola, WA 6530')"
+                                    + ", ('Lily', 'Allen', '0404040407', '7 Newhave Street, Mount Tarcoola, WA 6530')"
+                                    + ", ('Moss', 'Allen', '0404040408', '7 Newhave Street, Mount Tarcoola, WA 6530')";
         
         SQL_VEHICLE_TEST_DATA =    "INSERT INTO " + TBL_VEHICLE 
                                     + "(RegoNumber, Brand, Model, Year, Kilometres, CustomerID)"

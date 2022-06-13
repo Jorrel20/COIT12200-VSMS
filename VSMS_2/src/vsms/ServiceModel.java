@@ -15,7 +15,7 @@ import java.util.LinkedList;
 public class ServiceModel {
     
     //connection constants
-    private static final String DB_URL = "jdbc:mysql://localhost/vsms";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/VSMS";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "Acm3cats";
     
@@ -35,17 +35,17 @@ public class ServiceModel {
             connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             
             SQL_GET_CUSTOMER_BY_ID = connection.prepareStatement("SELECT * FROM Customer WHERE CustomerID = ?");
-            SQL_GET_CUSTOMER_BY_NAME = connection.prepareStatement("SELECT * FROM Customer WHERE Name LIKE ?");
+            SQL_GET_CUSTOMER_BY_NAME = connection.prepareStatement("SELECT * FROM Customer WHERE FirstName LIKE ? OR LastName LIKE ?");
             SQL_GET_CUSTOMER_BY_PHONE = connection.prepareStatement("SELECT * FROM Customer WHERE Phone = ?");
             SQL_INSERT_CUSTOMER = connection.prepareStatement("INSERT INTO Customer "
-                                                        + "(Name, Phone, Address) "
-                                                        + "VALUES (?, ?, ?)");
+                                                        + "(FirstName, LastName, Phone, Address) "
+                                                        + "VALUES (?, ?, ?, ?)");
             SQL_UPDATE_CUSTOMER = connection.prepareStatement("UPDATE Customer "
-                                                        + "SET Name = ?, Phone = ?, Address = ? "
+                                                        + "SET FirstName = ?, LastName = ?, Phone = ?, Address = ? "
                                                         + "WHERE CustomerID = ?");
             
         } catch (SQLException e) {
-            System.out.println("VirusTestModel.init: cannot create connection to db - " + e.getLocalizedMessage());
+            System.out.println("ServiceModel.init: cannot create connection to db - " + e.getLocalizedMessage());
             close();
         }
     }
@@ -58,7 +58,8 @@ public class ServiceModel {
             ResultSet rs = SQL_GET_CUSTOMER_BY_ID.executeQuery();
                 customer = new Customer(
                         rs.getInt("CustomerID"), 
-                        rs.getString("Name"), 
+                        rs.getString("FirstName"), 
+                        rs.getString("LastName"), 
                         rs.getString("Phone"), 
                         rs.getString("Address"));
                 
@@ -76,11 +77,13 @@ public class ServiceModel {
         try {
             name  = "%" + name + "%";
             SQL_GET_CUSTOMER_BY_NAME.setString(1, name);
+            SQL_GET_CUSTOMER_BY_NAME.setString(2, name);
             ResultSet rs = SQL_GET_CUSTOMER_BY_NAME.executeQuery();
             while (rs.next()){
                 Customer c = new Customer(
-                        rs.getInt("CustomerID"), 
-                        rs.getString("Name"), 
+                        rs.getInt("CustomerID"),  
+                        rs.getString("FirstName"), 
+                        rs.getString("LastName"), 
                         rs.getString("Phone"), 
                         rs.getString("Address"));
                 customers.add(c);
@@ -101,7 +104,8 @@ public class ServiceModel {
             while (rs.next()){
                 Customer c = new Customer(
                         rs.getInt("CustomerID"), 
-                        rs.getString("Name"), 
+                        rs.getString("FirstName"), 
+                        rs.getString("LastName"), 
                         rs.getString("Phone"), 
                         rs.getString("Address"));
                 customers.add(c);
@@ -116,9 +120,10 @@ public class ServiceModel {
     //adds a new customer entry to the db
     public void insertCustomer(Customer customer) {
         try {
-            SQL_INSERT_CUSTOMER.setString(1, customer.getName());
-            SQL_INSERT_CUSTOMER.setString(2, customer.getPhone());
-            SQL_INSERT_CUSTOMER.setString(3, customer.getAddress());
+            SQL_INSERT_CUSTOMER.setString(1, customer.getFName());
+            SQL_INSERT_CUSTOMER.setString(2, customer.getLName());
+            SQL_INSERT_CUSTOMER.setString(3, customer.getPhone());
+            SQL_INSERT_CUSTOMER.setString(4, customer.getAddress());
             
             SQL_INSERT_CUSTOMER.executeUpdate();
             System.out.println("customer added: " + customer.toString());
@@ -131,10 +136,11 @@ public class ServiceModel {
     //updates a customer entry
     public void updateCustomer(Customer customer) {
         try {
-            SQL_UPDATE_CUSTOMER.setString(1, customer.getName());
-            SQL_UPDATE_CUSTOMER.setString(2, customer.getPhone());
-            SQL_UPDATE_CUSTOMER.setString(3, customer.getAddress());
-            SQL_UPDATE_CUSTOMER.setInt(4, customer.getCustomerID());
+            SQL_UPDATE_CUSTOMER.setString(1, customer.getFName());
+            SQL_UPDATE_CUSTOMER.setString(2, customer.getLName());
+            SQL_UPDATE_CUSTOMER.setString(3, customer.getPhone());
+            SQL_UPDATE_CUSTOMER.setString(4, customer.getAddress());
+            SQL_UPDATE_CUSTOMER.setInt(5, customer.getCustomerID());
             
             SQL_UPDATE_CUSTOMER.executeUpdate();
             System.out.println("customer updated: " + customer.toString());

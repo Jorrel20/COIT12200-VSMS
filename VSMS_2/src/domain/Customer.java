@@ -8,15 +8,17 @@ public class Customer implements Comparable<Customer>{
 
     //instance variables
     private int customerID;
-    private String name;
+    private String fName;
+    private String lName;
     private String phone;
     private String address;
     
     //constructors
     
-    public Customer(int customerID, String name, String phone, String address) {
+    public Customer(int customerID, String fName, String lName, String phone, String address) {
         this.customerID = customerID;
-        this.name = name;
+        this.fName = fName;
+        this.lName = lName;
         this.phone = phone;
         this.address = address;
     } 
@@ -30,12 +32,20 @@ public class Customer implements Comparable<Customer>{
         this.customerID = customerID;
     }
 
-    public String getName() {
-        return name;
+    public String getFName() {
+        return fName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFName(String fName) {
+        this.fName = fName;
+    }
+    
+    public String getLName() {
+        return lName;
+    }
+
+    public void setLName(String lName) {
+        this.lName = lName;
     }
 
     public String getPhone() {
@@ -59,7 +69,8 @@ public class Customer implements Comparable<Customer>{
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Customer{customerID=").append(customerID);
-        sb.append(", name=").append(name);
+        sb.append(", fName=").append(fName);
+        sb.append(", lName=").append(lName);
         sb.append(", phone=").append(phone);
         sb.append(", address=").append(address);
         sb.append('}');

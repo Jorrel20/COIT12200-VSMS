@@ -7,11 +7,13 @@ package controller;
 
 import domain.Customer;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import vsms.VSMS;
 
@@ -23,6 +25,8 @@ import vsms.VSMS;
 public class ControllerCustomerView implements Initializable {
     
     private Customer currentCustomer;
+    private Integer currentCustomerIndex;
+    private LinkedList<Customer> searchResultCustomers;
 
     @FXML
     public TextField txtFirstName;
@@ -39,9 +43,15 @@ public class ControllerCustomerView implements Initializable {
     @FXML
     private TextField txtCustomerID;
     
+    @FXML
+    private TextField txtSearch;
+    
+    @FXML
+    private Label lblResults;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        searchResultCustomers = new LinkedList();
     }
     
     @FXML
@@ -49,14 +59,15 @@ public class ControllerCustomerView implements Initializable {
         if (validateCustomer()){
             Customer c = new Customer(
                 0,
-                String.format("%s %s", txtFirstName.getText(), txtLastName.getText()),
+                txtFirstName.getText(),
+                txtLastName.getText(),
                 txtPhone.getText(),
                 txtAddress.getText()
         );
         VSMS.getModel().insertCustomer(c);
         Alert success = new Alert(Alert.AlertType.INFORMATION);
         success.setHeaderText("Success!");
-        success.setContentText(c.getName() + " has been added.");
+        success.setContentText(c.getFName() + " has been added.");
         success.showAndWait();
         clearAll();
         }
@@ -64,7 +75,21 @@ public class ControllerCustomerView implements Initializable {
     
     @FXML
     public void updateCustomer () {
-        
+        if (validateCustomer() && txtCustomerID.getText() != null && !txtCustomerID.getText().trim().isEmpty()){
+            Customer c = new Customer(
+                currentCustomer.getCustomerID(),
+                txtFirstName.getText(),
+                txtLastName.getText(),
+                txtPhone.getText(),
+                txtAddress.getText()
+        );
+        VSMS.getModel().updateCustomer(c);
+        Alert success = new Alert(Alert.AlertType.INFORMATION);
+        success.setHeaderText("Success!");
+        success.setContentText("Customer (id: " + c.getCustomerID() + ") has been updated.");
+        success.showAndWait();
+        clearAll();
+        }
     }
     
     @FXML
@@ -78,14 +103,13 @@ public class ControllerCustomerView implements Initializable {
     
     @FXML
     public void searchCustomerByName () {
-        Customer c = new Customer(
-                0,
-                String.format("%s %s", txtFirstName.getText(), txtLastName.getText()),
-                txtPhone.getText(),
-                txtAddress.getText()
-        );
-        System.out.println(c);
-        VSMS.getModel().insertCustomer(c);
+        searchResultCustomers = VSMS.getModel().getCustomersByName(txtSearch.getText());
+        showResults();
+    }
+    
+    @FXML
+    public void searchCustomerByPhone () {
+        searchResultCustomers = VSMS.getModel().getCustomersByPhone(txtSearch.getText());
     }
     
     @FXML
@@ -131,6 +155,21 @@ public class ControllerCustomerView implements Initializable {
             invalid.showAndWait();    
         }
         return valid;
+    }
+
+    private void showResults () {
+        if (searchResultCustomers.size() > 0){
+            currentCustomerIndex = 0;
+            currentCustomer = searchResultCustomers.get(currentCustomerIndex);
+            txtFirstName.setText(currentCustomer.getFName());
+            txtLastName.setText(currentCustomer.getLName());
+            txtPhone.setText(currentCustomer.getPhone());
+            txtAddress.setText(currentCustomer.getAddress());
+            txtCustomerID.setText("" + currentCustomer.getCustomerID());
+        } else {
+            clearAll();
+            lblResults.setText("Search yeilded no results");
+        }
     }    
     
 }

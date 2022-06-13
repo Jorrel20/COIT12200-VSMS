@@ -19,13 +19,15 @@ public class VSMS extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
+        
+        DatabaseBuilder.buildDB();
+        model = new ServiceModel();
+        
         Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLMainView.fxml"));
         //root.getStylesheets().add(getClass().getResource("your_stylesheet.css").toString());
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        DatabaseBuilder.buildDB();
-        model = new ServiceModel();
     }
     
     public static void loadScene(String fxml){
