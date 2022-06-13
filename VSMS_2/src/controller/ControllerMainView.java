@@ -2,7 +2,7 @@
  * Rory Allen - s#12149026
  * Jorrel Arboleda - s#XXXXXXXX
  */
-package vsms;
+package controller;
 
 import java.net.URL;
 import java.util.Optional;
@@ -16,6 +16,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import vsms.ServiceModel;
+import vsms.VSMS;
 
 //main view controller class - just like it says on the box
 public class ControllerMainView implements Initializable {

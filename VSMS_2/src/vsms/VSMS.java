@@ -19,16 +19,16 @@ public class VSMS extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLMainView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLMainView.fxml"));
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
         DatabaseBuilder.buildDB();
     }
     
-    static void loadScene(String fxml){
+    public static void loadScene(String fxml){
         try {
-            Parent root = FXMLLoader.load(VSMS.class.getResource("FXML" + fxml + "View.fxml"));
+            Parent root = FXMLLoader.load(VSMS.class.getResource("/view/FXML" + fxml + "View.fxml"));
             scene.setRoot(root);
         } catch (IOException e) {
             System.out.println("cannot load scene: IOException - " + e.getLocalizedMessage());

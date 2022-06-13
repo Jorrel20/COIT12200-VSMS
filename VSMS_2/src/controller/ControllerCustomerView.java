@@ -3,19 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vsms;
+package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import vsms.VSMS;
 
 /**
  * FXML Controller class
  *
  * @author allen
  */
-public class ControllerVehicleView implements Initializable {
+public class ControllerCustomerView implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -23,9 +24,10 @@ public class ControllerVehicleView implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
     public void backToMain (ActionEvent event) {
         VSMS.loadScene("Main");
-    }
+    }    
+    
 }
