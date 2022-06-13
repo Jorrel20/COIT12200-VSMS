@@ -1,0 +1,58 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+    -fx-background-color: #c8e1e3;  
+}
+/* #dff9fb 98f3fa*/
+.button-back {
+    -fx-background-color: #ffbe76;
+    -fx-text-fill: #30336b;
+}
+
+.button-action {
+    -fx-background-color: #30336b;
+    -fx-text-fill: #dff9fb;
+}
+
+.combo-action {
+    -fx-background-color: #30336b;
+    -fx-text-fill: #dff9fb;
+    -jfx-focus-color: white;
+    -jfx-unfocus-color: white;
+}
+
+.combo-box > .list-cell {
+-fx-background: #30336b;
+-fx-background-color: #30336b;
+-fx-text-fill: white;
+}
+
+
+.page-heading {
+    -fx-text-fill: #ffbe76;
+    -fx-font-family: sans-serif;
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+}
+
+.main-title {
+    -fx-text-fill: #30336b;
+    -fx-font-family: serif;
+    -fx-font-size: 35px;
+    -fx-font-weight: bold;
+}
+
+.form-label {
+    -fx-text-fill: #30336b;
+    -fx-font-family: sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.text-area {
+    -fx-text-fill: #30336b;
+    -fx-font-family: monospaced;
+    -fx-font-size: 12px;
+}

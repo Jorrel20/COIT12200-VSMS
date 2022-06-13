@@ -6,3 +6,5 @@
 /VSMS2/dist/
 *.properties
 VSMS/nbproject/project.properties
+/VSMS_2/build/
+/VSMS_2/dist/
