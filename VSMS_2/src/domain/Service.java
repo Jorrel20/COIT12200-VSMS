@@ -6,7 +6,7 @@ package domain;
 
 import java.sql.Date;
 
-public class Service {
+public class Service implements Comparable<Service>{
     
     //instance variables
     private int serviceID;
@@ -72,5 +72,12 @@ public class Service {
         return "Service{" + "serviceID=" + serviceID + ", details=" + details + ", date=" + date + ", price=" + price + ", regoNumber=" + regoNumber + '}';
     }
     
-    
+    //compareTo (for sorting)
+    @Override
+    public int compareTo(Service other) {
+        if (this.price != other.getPrice()) {
+            return Double.compare(this.price, other.getPrice());
+        }
+        return this.date.compareTo(other.getDate());
+    }
 }
