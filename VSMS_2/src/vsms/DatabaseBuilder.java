@@ -131,7 +131,7 @@ public class DatabaseBuilder {
                 statement.executeUpdate(SQL_SERVICE_TEST_DATA);
             }
         } catch (SQLException e) {
-            System.out.println("DatabaseBuilder: Could not create admin table - " + e.getLocalizedMessage());
+            System.out.println("DatabaseBuilder: Could not create customer/vehicle/service table - " + e.getLocalizedMessage());
         }
         
     } // end buildDB

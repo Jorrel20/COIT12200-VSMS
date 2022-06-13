@@ -25,6 +25,7 @@ public class VSMS extends Application {
         stage.setScene(scene);
         stage.show();
         DatabaseBuilder.buildDB();
+        model = new ServiceModel();
     }
     
     public static void loadScene(String fxml){

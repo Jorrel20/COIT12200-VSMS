@@ -39,7 +39,7 @@ public class ServiceModel {
             SQL_GET_CUSTOMER_BY_PHONE = connection.prepareStatement("SELECT * FROM Customer WHERE Phone = ?");
             SQL_INSERT_CUSTOMER = connection.prepareStatement("INSERT INTO Customer "
                                                         + "(Name, Phone, Address) "
-                                                        + "VALUES (?, ?, ?, ?, ?)");
+                                                        + "VALUES (?, ?, ?)");
             SQL_UPDATE_CUSTOMER = connection.prepareStatement("UPDATE Customer "
                                                         + "SET Name = ?, Phone = ?, Address = ? "
                                                         + "WHERE CustomerID = ?");

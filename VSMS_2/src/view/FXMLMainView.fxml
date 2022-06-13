@@ -14,11 +14,11 @@
 
 <AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="600.0" stylesheets="@/vsms/styles.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerMainView">
    <children>
-      <VBox prefHeight="480.0" prefWidth="600.0">
+      <VBox prefHeight="480.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@../vsms/styles.css">
          <children>
             <Pane prefHeight="135.0" prefWidth="600.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="72.0" prefWidth="600.0" text="Vehicle Service Management System" textAlignment="CENTER">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="72.0" prefWidth="600.0" styleClass="main-title" text="Vehicle Service Management System" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -28,32 +28,32 @@
             </Pane>
             <VBox alignment="CENTER" prefHeight="429.0" prefWidth="600.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="434.0" prefWidth="600.0" style="-fx-background-color: #FFF;">
+                  <HBox alignment="CENTER" prefHeight="434.0" prefWidth="600.0">
                      <children>
-                        <ImageView fx:id="imvLogo" fitHeight="313.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imvLogo" fitHeight="313.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" styleClass="mainFxmlClass">
                            <image>
                               <Image url="@../../Logo1.png" />
                            </image>
                         </ImageView>
-                        <VBox alignment="CENTER" prefHeight="427.0" prefWidth="201.0">
+                        <VBox alignment="CENTER" prefHeight="427.0" prefWidth="201.0" styleClass="mainFxmlClass">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#goToCustomers" prefWidth="100.0" text="Customers">
+                              <Button mnemonicParsing="false" onAction="#goToCustomers" prefWidth="100.0" styleClass="button-action" text="Customers">
                                  <VBox.margin>
                                     <Insets bottom="20.0" top="20.0" />
                                  </VBox.margin></Button>
-                              <Button mnemonicParsing="false" onAction="#goToVehicles" prefWidth="100.0" text="Vehicles">
+                              <Button mnemonicParsing="false" onAction="#goToVehicles" prefWidth="100.0" styleClass="button-action" text="Vehicles">
                                  <VBox.margin>
                                     <Insets bottom="20.0" top="20.0" />
                                  </VBox.margin></Button>
-                              <Button mnemonicParsing="false" onAction="#goToServices" prefWidth="100.0" text="Services">
+                              <Button mnemonicParsing="false" onAction="#goToServices" prefWidth="100.0" styleClass="button-action" text="Services">
                                  <VBox.margin>
                                     <Insets bottom="20.0" top="20.0" />
                                  </VBox.margin></Button>
-                              <Button mnemonicParsing="false" onAction="#goToStats" prefWidth="100.0" text="Statistics">
+                              <Button mnemonicParsing="false" onAction="#goToStats" prefWidth="100.0" styleClass="button-action" text="Statistics">
                                  <VBox.margin>
                                     <Insets bottom="20.0" top="20.0" />
                                  </VBox.margin></Button>
-                              <Button mnemonicParsing="false" onAction="#exit" prefWidth="100.0" text="Close">
+                              <Button mnemonicParsing="false" onAction="#exit" prefWidth="100.0" styleClass="button-back" text="Close">
                                  <VBox.margin>
                                     <Insets bottom="20.0" top="20.0" />
                                  </VBox.margin></Button>

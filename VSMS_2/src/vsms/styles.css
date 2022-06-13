@@ -1,7 +1,64 @@
 /*
- * Empty Stylesheet file.
+ * Stylesheet for vsms.
+ * Author: Rory Allen
  */
 
 .mainFxmlClass {
+    -fx-background-color: #535c68;  
+}
+/* #dff9fb 98f3fa*/
+.button-back {
+    -fx-background-color: #6ab04c;
+    -fx-text-fill: #535c68;
+}
 
+.button-action {
+    -fx-background-color: #badc58;
+    -fx-text-fill: #535c68;
+}
+
+.combo-action {
+    -fx-background-color: #30336b;
+    -fx-text-fill: #dff9fb;
+    -jfx-focus-color: white;
+    -jfx-unfocus-color: white;
+}
+
+.combo-box > .list-cell {
+-fx-background: #30336b;
+-fx-background-color: #30336b;
+-fx-text-fill: white;
+}
+
+
+.page-heading {
+    -fx-text-fill: #badc58;
+    -fx-font-family: sans-serif;
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+}
+
+.main-title {
+    -fx-text-fill: #badc58;
+    -fx-font-family: serif;
+    -fx-font-size: 35px;
+    -fx-font-weight: bold;
+}
+
+.form-label {
+    -fx-text-fill: #6ab04c;
+    -fx-font-family: sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.text-area {
+    -fx-text-fill: #30336b;
+    -fx-font-family: monospaced;
+    -fx-font-size: 12px;
+}
+
+.box {
+    -fx-stroke: #6ab04c;
+    -fx-fill: transparent;
 }
