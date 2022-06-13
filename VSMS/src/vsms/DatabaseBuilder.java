@@ -16,10 +16,11 @@ import java.sql.Statement;
  * @author allen
  */
 public class DatabaseBuilder {
+    private static final boolean ADD_TEST_DATA = false;//if true, loads db with test data
     private static final String DB_NAME = "VSMS",
                                 MYSQL_URL = "jdbc:mysql://localhost:3306",
                                 USERNAME = "root",
-                                PASSWORD = "Acm3cats", //Acm3cats
+                                PASSWORD = "Acm3cats",
             
                                 TBL_CUSTOMER = "Customer",
                                 TBL_VEHICLE = "Vehicle",
@@ -36,23 +37,23 @@ public class DatabaseBuilder {
     private static Connection connection;
     private static Statement statement;
     
-    static boolean buildDB(){
+    static void buildDB(){
         DB_URL = MYSQL_URL + "/" + DB_NAME;
         
-        try {//check if database exists, built it if not
+        try {//check if database exists, builds it if not
             connection = DriverManager.getConnection(MYSQL_URL, USERNAME, PASSWORD);
             ResultSet resultSet = connection.getMetaData().getCatalogs();
             while (resultSet.next()) {
               if(resultSet.getString(1).equalsIgnoreCase("vsms")){
                   connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
-                  return true;
-                  //break;
+                  return;
               }
             }
             resultSet.close();
         } catch (SQLException e) {
             System.out.println("DatabaseManager: Could not get connection - " + e.getLocalizedMessage());
         }
+        
         //create database if it does not extist
         SQL_CREATE_DB = "CREATE DATABASE IF NOT EXISTS " + DB_NAME;
         
@@ -124,13 +125,14 @@ public class DatabaseBuilder {
             statement.executeUpdate(SQL_CREATE_CUSTOMER_TABLE);
             statement.executeUpdate(SQL_CREATE_VEHICLE_TABLE);
             statement.executeUpdate(SQL_CREATE_SERVICE_TABLE);
-            statement.executeUpdate(SQL_CUSTOMER_TEST_DATA);
-            statement.executeUpdate(SQL_VEHICLE_TEST_DATA);
-            statement.executeUpdate(SQL_SERVICE_TEST_DATA);//for testing purposes
+            if (ADD_TEST_DATA){
+                statement.executeUpdate(SQL_CUSTOMER_TEST_DATA);
+                statement.executeUpdate(SQL_VEHICLE_TEST_DATA);
+                statement.executeUpdate(SQL_SERVICE_TEST_DATA);
+            }
         } catch (SQLException e) {
             System.out.println("DatabaseBuilder: Could not create admin table - " + e.getLocalizedMessage());
         }
         
-        return false;
     } // end buildDB
 }

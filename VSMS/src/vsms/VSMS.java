@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 public class VSMS extends Application {
     
     private static Scene scene;
+    private static ServiceModel model;
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -22,6 +23,7 @@ public class VSMS extends Application {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        DatabaseBuilder.buildDB();
     }
     
     static void loadScene(String fxml){
@@ -31,6 +33,10 @@ public class VSMS extends Application {
         } catch (IOException e) {
             System.out.println("cannot load scene: IOException - " + e.getLocalizedMessage());
         }
+    }
+    
+    public static ServiceModel getModel (){
+        return model;
     }
 
     public static void main(String[] args) {launch(args);}
