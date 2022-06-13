@@ -67,14 +67,7 @@ public class Customer implements Comparable<Customer>{
     //toString
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Customer{customerID=").append(customerID);
-        sb.append(", fName=").append(fName);
-        sb.append(", lName=").append(lName);
-        sb.append(", phone=").append(phone);
-        sb.append(", address=").append(address);
-        sb.append('}');
-        return sb.toString();
+        return fName + " " + lName + " (id: " + customerID + ")";
     }
     
     

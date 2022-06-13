@@ -24,7 +24,8 @@ public class ServiceModel {
     private Connection connection = null;
     
     //stored sql queries
-    private PreparedStatement   SQL_GET_CUSTOMER_BY_ID = null,
+    private PreparedStatement   SQL_GET_ALL_CUSTOMERS = null,
+                                SQL_GET_CUSTOMER_BY_ID = null,
                                 SQL_GET_CUSTOMER_BY_NAME = null,
                                 SQL_GET_CUSTOMER_BY_PHONE = null,
                                 SQL_INSERT_CUSTOMER = null,
@@ -38,6 +39,7 @@ public class ServiceModel {
         try {
             connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             
+            SQL_GET_ALL_CUSTOMERS = connection.prepareStatement("SELECT * FROM Customer");
             SQL_GET_CUSTOMER_BY_ID = connection.prepareStatement("SELECT * FROM Customer WHERE CustomerID = ?");
             SQL_GET_CUSTOMER_BY_NAME = connection.prepareStatement("SELECT * FROM Customer WHERE FirstName LIKE ? OR LastName LIKE ?");
             SQL_GET_CUSTOMER_BY_PHONE = connection.prepareStatement("SELECT * FROM Customer WHERE Phone = ?");
@@ -55,6 +57,26 @@ public class ServiceModel {
             System.out.println("ServiceModel.init: cannot create connection to db - " + e.getLocalizedMessage());
             close();
         }
+    }
+    
+    public LinkedList<Customer> getAllCustomers() {
+        LinkedList<Customer> customers = new LinkedList();
+        try {
+            ResultSet rs = SQL_GET_ALL_CUSTOMERS.executeQuery();
+            while (rs.next()){
+                Customer c = new Customer(
+                        rs.getInt("CustomerID"),  
+                        rs.getString("FirstName"), 
+                        rs.getString("LastName"), 
+                        rs.getString("Phone"), 
+                        rs.getString("Address"));
+                customers.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println("ServiceModel.getCustomerByID: problem executing query - " + e.getLocalizedMessage());
+            close();
+        }    
+        return customers;
     }
     
     //returns customer for a given id
@@ -184,4 +206,6 @@ public class ServiceModel {
             System.out.println("VirusTestModel.close: problem closing connection - " + e.getLocalizedMessage());
         }
     }
+
+    
 }
