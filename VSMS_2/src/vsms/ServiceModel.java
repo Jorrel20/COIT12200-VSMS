@@ -88,7 +88,6 @@ public class ServiceModel {
             
         } catch (SQLException e) {
             System.out.println("ServiceModel.init: cannot create connection to db - " + e.getLocalizedMessage());
-            close();
         }
     }
     
@@ -107,7 +106,6 @@ public class ServiceModel {
             }
         } catch (SQLException e) {
             System.out.println("ServiceModel.getAllCustomers: problem executing query - " + e.getLocalizedMessage());
-            close();
         }    
         return customers;
     }
@@ -128,7 +126,6 @@ public class ServiceModel {
             
         } catch (SQLException e) {
             System.out.println("ServiceModel.getCustomerByID: problem executing query - " + e.getLocalizedMessage());
-            close();
         }
         return customer;
     }
@@ -152,7 +149,6 @@ public class ServiceModel {
             }
         } catch (SQLException e) {
             System.out.println("ServiceModel.getCustomersByName: problem executing query - " + e.getLocalizedMessage());
-            close();
         }
         return customers;
     }
@@ -174,7 +170,6 @@ public class ServiceModel {
             }
         } catch (SQLException e) {
             System.out.println("ServiceModel.getCustomersByPhone: problem executing query - " + e.getLocalizedMessage());
-            close();
         }
         return customers;
     }
@@ -191,7 +186,6 @@ public class ServiceModel {
             System.out.println("customer added: " + customer.toString());
         } catch (SQLException e) {
             System.out.println("ServiceModel.insertCustomer: problem executing query - " + e.getLocalizedMessage());
-            close();
         }
     }
     
@@ -208,7 +202,6 @@ public class ServiceModel {
             System.out.println("customer updated: " + customer.toString());
         } catch (SQLException e) {
             System.out.println("ServiceModel.updateCustomer: problem executing query - " + e.getLocalizedMessage());
-            close();
         }
     }
     
@@ -226,7 +219,6 @@ public class ServiceModel {
             System.out.println("vehicle added: " + vehicle.toString());
         } catch (SQLException e) {
             System.out.println("ServiceModel.insertVehicle: problem executing query - " + e.getLocalizedMessage());
-            close();
         }
     }
     
@@ -246,7 +238,6 @@ public class ServiceModel {
             }
         } catch (SQLException e) {
             System.out.println("ServiceModel.getAllServices: problem executing query - " + e.getLocalizedMessage());
-            close();
         }    
         return services;
     }
@@ -255,7 +246,7 @@ public class ServiceModel {
     public LinkedList<Service> getServicesByRego(String rego) {
         LinkedList servives = new LinkedList();
         try {
-            SQL_GET_CUSTOMER_BY_NAME.setString(1, rego);
+            SQL_GET_SERVICES_BY_REGO.setString(1, rego);
             ResultSet rs = SQL_GET_SERVICES_BY_REGO.executeQuery();
             while (rs.next()){
                 Service s = new Service(
@@ -268,7 +259,6 @@ public class ServiceModel {
             }
         } catch (SQLException e) {
             System.out.println("ServiceModel.getServiceByRego: problem executing query - " + e.getLocalizedMessage());
-            close();
         }
         return servives;
     }
@@ -284,7 +274,6 @@ public class ServiceModel {
             SQL_INSERT_SERVICE.executeUpdate();
         } catch (SQLException e) {
             System.out.println("ServiceModel.insertService: problem executing query - " + e.getLocalizedMessage());
-            close();
         }
     }
     
@@ -298,7 +287,6 @@ public class ServiceModel {
             SQL_DELETE_SERVICE.execute();
         } catch (SQLException e) {
             System.out.println("ServiceModel.deleteService: problem executing query - " + e.getLocalizedMessage());
-            close();
         }
     }
     
@@ -309,7 +297,6 @@ public class ServiceModel {
             min = SQL_GET_MIN_PRICE.executeQuery().getDouble("minPrice");
         } catch (SQLException e) {
             System.out.println("ServiceModel.minimumPrice: problem executing query - " + e.getLocalizedMessage());
-            close();
         }
         return min;
     }
@@ -321,7 +308,6 @@ public class ServiceModel {
             max = SQL_GET_MAX_PRICE.executeQuery().getDouble("maxPrice");
         } catch (SQLException e) {
             System.out.println("ServiceModel.maximumPrice: problem executing query - " + e.getLocalizedMessage());
-            close();
         }
         return max;
     }
@@ -333,7 +319,6 @@ public class ServiceModel {
             avg = SQL_GET_AVG_PRICE.executeQuery().getDouble("avgPrice");
         } catch (SQLException e) {
             System.out.println("ServiceModel.averagePrice: problem executing query - " + e.getLocalizedMessage());
-            close();
         }
         return avg;
     }
@@ -349,7 +334,6 @@ public class ServiceModel {
             }
         } catch (SQLException e) {
             System.out.println("ServiceModel.getNumVehiclesByBrand: problem executing query - " + e.getLocalizedMessage());
-            close();
         }
         return vehiclesByBrand;
     }
@@ -367,7 +351,6 @@ public class ServiceModel {
             }
         } catch (SQLException e) {
             System.out.println("ServiceModel.getNumServicesByBrand: problem executing query - " + e.getLocalizedMessage());
-            close();
         }
         return servicesByBrand;
     }

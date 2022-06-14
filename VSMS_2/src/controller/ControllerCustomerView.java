@@ -30,7 +30,7 @@ public class ControllerCustomerView implements Initializable {
     private LinkedList<Customer> searchResultCustomers;
 
     @FXML
-    public TextField txtFirstName;
+    private TextField txtFirstName;
     
     @FXML
     private TextField txtLastName;

@@ -72,6 +72,10 @@ public class Service implements Comparable<Service>{
         return "Service{" + "serviceID=" + serviceID + ", details=" + details + ", date=" + date + ", price=" + price + ", regoNumber=" + regoNumber + '}';
     }
     
+    public String listString() {
+        return String.format("Price: $.2f, Date: %s, Rego: %s\n", price, date.toString(), regoNumber);
+    }
+    
     //compareTo (for sorting)
     @Override
     public int compareTo(Service other) {
