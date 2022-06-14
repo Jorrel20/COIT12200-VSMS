@@ -8,11 +8,13 @@ import domain.Customer;
 import domain.Service;
 import domain.Vehicle;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import javafx.util.Pair;
 
 public class ServiceModel {
     
@@ -34,9 +36,9 @@ public class ServiceModel {
             
                                 SQL_INSERT_VEHICLE,
             
-                                SQL_INSERT_SERVICE,
                                 SQL_GET_ALL_SERVICES,
                                 SQL_GET_SERVICES_BY_REGO,
+                                SQL_INSERT_SERVICE,
                                 SQL_DELETE_SERVICE,
             
                                 SQL_GET_MIN_PRICE,
@@ -210,7 +212,7 @@ public class ServiceModel {
         }
     }
     
-    //adds a new customer entry to the db
+    //adds a new vehicle entry to the db
     public void insertVehicle(Vehicle vehicle) {
         try {
             SQL_INSERT_VEHICLE.setString(1, vehicle.getRegoNumber());
@@ -228,6 +230,7 @@ public class ServiceModel {
         }
     }
     
+    //returns collection of all services from db
     public LinkedList<Service> getAllServices () {
         LinkedList<Service> services = new LinkedList();
         try {
@@ -246,6 +249,127 @@ public class ServiceModel {
             close();
         }    
         return services;
+    }
+    
+    //returns services matching a given rego
+    public LinkedList<Service> getServicesByRego(String rego) {
+        LinkedList servives = new LinkedList();
+        try {
+            SQL_GET_CUSTOMER_BY_NAME.setString(1, rego);
+            ResultSet rs = SQL_GET_SERVICES_BY_REGO.executeQuery();
+            while (rs.next()){
+                Service s = new Service(
+                        rs.getInt("ServiceID"),  
+                        rs.getString("Details"), 
+                        rs.getDate("Date"), 
+                        rs.getDouble("Price"), 
+                        rs.getString("RegoNumber"));
+                servives.add(s);
+            }
+        } catch (SQLException e) {
+            System.out.println("ServiceModel.getServiceByRego: problem executing query - " + e.getLocalizedMessage());
+            close();
+        }
+        return servives;
+    }
+    
+    //adds a new service entry to the db
+    public void insertService(Service service) {
+        try {
+            SQL_INSERT_SERVICE.setString(1, service.getDetails());
+            SQL_INSERT_SERVICE.setDate(2, service.getDate());
+            SQL_INSERT_SERVICE.setDouble(3, service.getPrice());
+            SQL_INSERT_SERVICE.setString(4, service.getRegoNumber());
+            
+            SQL_INSERT_SERVICE.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("ServiceModel.insertService: problem executing query - " + e.getLocalizedMessage());
+            close();
+        }
+    }
+    
+    //removes a service for a given date and rego
+    //**NB  -ALL services (usually 1) for a given date and rego will be deleted.
+    //**    -Noted in case (for some reason) one vehicle gets serviced multiple times in one day.
+    public void deleteService(Date date, String rego) {
+        try {
+            SQL_DELETE_SERVICE.setDate(1, date);
+            SQL_DELETE_SERVICE.setString(2, rego);
+            SQL_DELETE_SERVICE.execute();
+        } catch (SQLException e) {
+            System.out.println("ServiceModel.deleteService: problem executing query - " + e.getLocalizedMessage());
+            close();
+        }
+    }
+    
+    //returns minimum price of service
+    public double minimumPrice() {
+        double min = 0;
+        try {
+            min = SQL_GET_MIN_PRICE.executeQuery().getDouble("minPrice");
+        } catch (SQLException e) {
+            System.out.println("ServiceModel.minimumPrice: problem executing query - " + e.getLocalizedMessage());
+            close();
+        }
+        return min;
+    }
+    
+    //returns maximum price of service
+    public double maximumPrice() {
+        double max = 0;
+        try {
+            max = SQL_GET_MAX_PRICE.executeQuery().getDouble("maxPrice");
+        } catch (SQLException e) {
+            System.out.println("ServiceModel.maximumPrice: problem executing query - " + e.getLocalizedMessage());
+            close();
+        }
+        return max;
+    }
+    
+    //returns average price of service
+    public double averagePrice() {
+        double avg = 0;
+        try {
+            avg = SQL_GET_AVG_PRICE.executeQuery().getDouble("avgPrice");
+        } catch (SQLException e) {
+            System.out.println("ServiceModel.averagePrice: problem executing query - " + e.getLocalizedMessage());
+            close();
+        }
+        return avg;
+    }
+    
+    //returns list of number of vehicles per vehicle brand
+    public LinkedList<Pair> getNumVehiclesByBrand() {
+        LinkedList vehiclesByBrand = new LinkedList();
+        try {
+            ResultSet rs = SQL_GET_NUM_VEHICLE_BY_BRAND.executeQuery();
+            while (rs.next()){
+                Pair p = new Pair(rs.getString("Brand"), rs.getInt("NumVehicles"));
+                vehiclesByBrand.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println("ServiceModel.getNumVehiclesByBrand: problem executing query - " + e.getLocalizedMessage());
+            close();
+        }
+        return vehiclesByBrand;
+    }
+    
+    //returns list of top 3 number of services per vehicle brand
+    public LinkedList<Pair> getNumServicesByBrand() {
+        LinkedList servicesByBrand = new LinkedList();
+        try {
+            ResultSet rs = SQL_GET_NUM_SERVICE_BY_BRAND.executeQuery();
+            int i = 1;
+            while (rs.next() && i <= 3){
+                Pair p = new Pair(rs.getString("Brand"), rs.getInt("NumServices"));
+                servicesByBrand.add(p);
+                i++;
+            }
+        } catch (SQLException e) {
+            System.out.println("ServiceModel.getNumServicesByBrand: problem executing query - " + e.getLocalizedMessage());
+            close();
+        }
+        return servicesByBrand;
     }
     
     //for closing connection
